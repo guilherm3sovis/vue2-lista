@@ -1,0 +1,19 @@
+{
+  "name": "vite-js",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^3.0.9",
+    "vite-plugin-vue2": "^2.0.2",
+    "vue-template-compiler": "^2.7.10"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "axios": "^1.8.3",
+    "vue": "^2.7.10"
+  }
+}
