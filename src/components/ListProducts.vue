@@ -1,5 +1,7 @@
 <script>
 import { ref, defineComponent } from 'vue'
+import axios from 'axios'
+
 import ProductPhoto from './ProductPhoto.vue'
 
 export default defineComponent({
@@ -7,15 +9,30 @@ export default defineComponent({
   components: {
     ProductPhoto,
   },
-  props: {
-    productsList: {
-      type: Array,
-      required: true,
+  computed: {
+    productsList() {
+      return this.$store.getters.getProducts;
+    }
+  },
+  methods: {
+    async getPosts() {
+        try {
+            // Fazendo a requisição à API
+            const response = await axios.get('https://fakestoreapi.com/products')
+            // Atribuindo os dados à variável posts
+            
+            this.$store.commit('productsLoader', {products: response.data})
+            // this.posts = response.data
+            // this.filteredPosts = response.data
+        } catch (error) {
+            console.error('Erro ao buscar posts:', error)
+        }
     },
-    msg: {
-      type: String,
-      required: false,
-    },
+  },
+  mounted() {
+    // Chama o método assim que o componente é montado
+    console.log('mounted')
+    this.getPosts()
   },
 })
 </script>
@@ -23,6 +40,7 @@ export default defineComponent({
 
 <template>
   <div id="list-products">
+    <!-- <pre>{{ productsList }}</pre> -->
     <div class="item-container" v-for="product in productsList" :key="product.id">
       <p>{{ product.title }}</p>
       <ProductPhoto :image="product.image" />
@@ -40,6 +58,7 @@ export default defineComponent({
     gap: 1em;
     max-width: 600px;
     justify-self: center;
+    margin-top: 24px;
   }
 
   .item-container {

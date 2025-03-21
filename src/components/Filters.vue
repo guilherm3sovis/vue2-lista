@@ -3,38 +3,13 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'Filters',
-  beforeCreate: function() {
-
-  },
-  created: function() {
-
-  },
-  beforeMount: function() {
-
-  },
-  mounted: function() {
-    this.localMin = this.min
-    this.localMax = this.max
-  },
-  beforeDestroy: function () {
-
-  },
-  destroyed: function() {
-
-  },
-  beforeUpdate: function() {
-
-  },
-  updated: function() {
-
-  },
   methods: {
-    applyFilter() {
-      // Acessa o método do pai usando a inject API
-      if (this.filterMethod) {
-        this.filterMethod(this.localMin, this.localMax);
-      }
-    }
+    // applyFilter() {
+    //   // Acessa o método do pai usando a inject API
+    //   if (this.filterMethod) {
+    //     this.filterMethod(this.localMin, this.localMax);
+    //   }
+    // }
   },
   watch: {
     max(newValue) {
@@ -44,11 +19,8 @@ export default defineComponent({
       this.localMin = newValue
     }
   },
-  inject: ['filterMethod'], // Injeta o método do componente pai
+  // inject: ['filterMethod'], // Injeta o método do componente pai
   computed: {
-    count() {
-      return this.$store.getters.getCount;
-    },
     min() { 
       return this.$store.getters.getMin;
     },
@@ -73,7 +45,8 @@ export default defineComponent({
       placeholder="Máximo"
       @change="$store.commit('setMax', $event.target.value)"
     />
-    <button @click="applyFilter">Aplicar</button>
+    <!-- old way <button @click="applyFilter">Aplicar</button> -->
+    <button @click="$store.commit('filterProducts', {min, max})">Aplicar</button>
   </div>
 </template>
 
