@@ -13,6 +13,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       vue: 'vue/dist/vue.esm.js',
+      'vue-router': 'vue-router/dist/vue-router.esm.js',
+      'vuex': 'vuex/dist/vuex.min.js'
     },
   },
   build: {
