@@ -69,8 +69,6 @@
 <template>
     <div>
         <Filters 
-            :min="0" 
-            :max="maxPrice" 
             ref="filtersComponent"
         />
 

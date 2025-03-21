@@ -3,22 +3,6 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'Filters',
-  props: {
-    min: {
-      type: Number,
-      default: 0,
-    },
-    max: {
-      type: Number,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      localMax: this.max,
-      localMin: this.min
-    }
-  },
   beforeCreate: function() {
 
   },
@@ -60,14 +44,35 @@ export default defineComponent({
       this.localMin = newValue
     }
   },
-  inject: ['filterMethod'] // Injeta o método do componente pai
+  inject: ['filterMethod'], // Injeta o método do componente pai
+  computed: {
+    count() {
+      return this.$store.getters.getCount;
+    },
+    min() { 
+      return this.$store.getters.getMin;
+    },
+    max() { 
+      return this.$store.getters.getMax;
+    }
+  }
 })
 </script>
 
 <template>
   <div id="filters">
-    <input type="number" placeholder="Mínimo" v-model.number="localMin" />
-    <input type="number" placeholder="Máximo" v-model.number="localMax" />
+    <input 
+      value="min"
+      type="number"
+      placeholder="Mínimo"
+      @change="$store.commit('setMin', $event.target.value)"
+    />
+    <input
+      value="max"
+      type="number"
+      placeholder="Máximo"
+      @change="$store.commit('setMax', $event.target.value)"
+    />
     <button @click="applyFilter">Aplicar</button>
   </div>
 </template>
