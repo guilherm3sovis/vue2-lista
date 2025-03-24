@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 import axios from 'axios';
 
 Vue.use(Vuex);
+const baseUrl = "http://localhost:8080/api" // API Java
+const baseProductsUrl = `${baseUrl}/products`
 
 const store = new Vuex.Store({
   state: {
@@ -25,7 +27,7 @@ const store = new Vuex.Store({
     async fetchDados({ commit }) {
       commit('setLoading', true); // Define o estado como "carregando"
       try {
-        const response = await axios.get('https://fakestoreapi.com/products');
+        const response = await axios.get(baseProductsUrl);
         commit('setDados', response.data); // Quando a requisição for concluída, chama a mutation
       } catch (error) {
         commit('setError', error); // Em caso de erro, chama a mutation para definir o erro
