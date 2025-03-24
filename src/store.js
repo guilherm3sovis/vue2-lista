@@ -1,56 +1,39 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
-    min: 0,
-    max: 1001,
-    posts: [],
-    filteredPosts: [],
+    dados: null, // Aqui você vai armazenar os dados da requisição
+    loading: false, // Para controlar o carregamento
+    error: null // Para capturar possíveis erros
   },
   mutations: {
-    increment (state) {
-      console.log('call increment() on state')
-      state.count++
+    setDados(state, dados) {
+      state.dados = dados; // Atualiza o estado com os dados da requisição
     },
-    setMin(state, min) {
-      console.log('call setMin() on state w/ value', min)
-      state.min = min
+    setLoading(state, loading) {
+      state.loading = loading; // Atualiza o estado de carregamento
     },
-    setMax(state, max) {
-      console.log('call setMax() on state w/ value', max)
-      state.max = max
-    },
-    filterProducts(min, max) {
-      console.log('Filtrando produtos:', min, max)
-      // Filtra os produtos baseado nos valores min e max
-      this.filteredPosts = this.posts.filter(
-          product => product.price >= min && product.price <= max
-      )
-    },
-    productsLoader(state, products) {
-      state.filteredPosts = products;
-      state.posts = products;
+    setError(state, error) {
+      state.error = error; // Atualiza o estado com um possível erro
     }
   },
-  getters: {
-    getCount(state) {
-        return state.count;
-    },
-    getMin(state) {
-      return state.min;
-    },
-    getMax(state) {
-      return state.max;
-    },
-    getProducts(state) {
-      console.log(state.filteredPosts.products || state.posts.products);
-      return state.filteredPosts.products || state.posts.products;
+  actions: {
+    async fetchDados({ commit }) {
+      commit('setLoading', true); // Define o estado como "carregando"
+      try {
+        const response = await axios.get('https://fakestoreapi.com/products');
+        commit('setDados', response.data); // Quando a requisição for concluída, chama a mutation
+      } catch (error) {
+        commit('setError', error); // Em caso de erro, chama a mutation para definir o erro
+      } finally {
+        commit('setLoading', false); // Termina o estado de carregamento
+      }
     }
-  },
-})
+  }
+});
 
 export default store;

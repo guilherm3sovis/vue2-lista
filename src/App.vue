@@ -8,15 +8,12 @@ export default defineComponent({
 
 <template>
   <div id="app">
-    <img src="@/assets/logo.svg" alt="Vite logo" height="30px" width="30px" />
     <div class="menu-contain">
-      ////////
       <router-link to="/">Lista</router-link>
-      ////////
+      / / /
       <router-link to="/foo">Go to Foo</router-link>
-      ////////
+      / / /
       <router-link to="/bar">Go to Bar</router-link>
-      ////////
     </div>
 
     <!-- carregamento de rotas -->
@@ -30,8 +27,8 @@ export default defineComponent({
   }
   .menu-contain a,
   .menu-contain a:visited {
-    text-decoration: none;
-    color: #3f3f3f;
+    text-decoration: underline;
+    color: #242424;
   }
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -14,9 +14,9 @@ const extrairParametroId = route => ({
 })
 
 const routes = [
+    { path: '/', component: Home },
     { path: '/foo', component: Foo },
     { path: '/bar', component: Bar },
-    { path: '/', component: Home },
     { 
       path: '/:id(\\d+)/details', 
       meta: { requerAutenticacao: true },
