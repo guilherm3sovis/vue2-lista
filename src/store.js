@@ -34,6 +34,21 @@ const store = new Vuex.Store({
       } finally {
         commit('setLoading', false); // Termina o estado de carregamento
       }
+    },
+    async addProduct({ commit }, product) {
+      commit('setLoading', true);
+      commit('setError', null);
+      
+      try {
+        const response = await axios.post(baseProductsUrl, product);
+        commit('setDados', response.data);
+        return response.data;
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      } finally {
+        commit('setLoading', false);
+      }
     }
   }
 });

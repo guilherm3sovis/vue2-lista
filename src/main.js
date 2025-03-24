@@ -2,11 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import Home from './views/Home.vue'
+import AddProduct from './views/Add.vue'
 // import router from './router'
 import store from './store'
 
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
+// const AddProduct = { template: '<div>Add prod</div>' }
+// const Bar = { template: '<div>bar</div>' }
 const ContatoEditar = { template: '<div>detalhe interno</div>' }
 
 const extrairParametroId = route => ({
@@ -15,8 +16,8 @@ const extrairParametroId = route => ({
 
 const routes = [
     { path: '/', component: Home },
-    { path: '/foo', component: Foo },
-    { path: '/bar', component: Bar },
+    { path: '/add', component: AddProduct },
+    // { path: '/bar', component: Bar },
     { 
       path: '/:id(\\d+)/details', 
       meta: { requerAutenticacao: true },
