@@ -9,9 +9,11 @@ export default defineComponent({
 <template>
   <div id="app">
     <div class="menu-contain">
-      <router-link to="/">Lista</router-link>
+      <router-link to="/">Home</router-link>
       |
       <router-link to="/add">Add Product</router-link>
+      |
+      <router-link to="/list">List Product's</router-link>
     </div>
 
     <!-- carregamento de rotas -->

@@ -5,7 +5,8 @@
     <div v-if="dados" class="products-grid">
       <div class="product-link" v-for="dado in dados">
         <a v-bind:href="'/' + dado.id + '/details'" class="product-container">
-          <img :src="'https://picsum.photos/id/' + dado.id + '/700'" />
+          <!-- <img :src="'https://picsum.photos/id/' + dado.id + '/220'" /> -->
+          <img :src="'https://via.assets.so/furniture.png?id=' + dado.id + '&q=95&w=360&h=360&fit=fill'" />
           <div class="product-info">
             <div class="product-name">{{ dado.name }}</div>
             <div class="product-price">{{ dado.price }}</div>

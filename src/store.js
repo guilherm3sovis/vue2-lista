@@ -49,6 +49,34 @@ const store = new Vuex.Store({
       } finally {
         commit('setLoading', false);
       }
+    },
+    async updateProduct({ commit, dispatch }, { id, product }) {
+      commit('setLoading', true);
+      commit('setError', null);
+      try {
+        await axios.put(`${baseProductsUrl}/${id}`, product);
+        // Fetch fresh data after update
+        await dispatch('fetchDados');
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      } finally {
+        commit('setLoading', false);
+      }
+    },
+    async deleteProduct({ commit, dispatch }, id) {
+      commit('setLoading', true);
+      commit('setError', null);
+      try {
+        await axios.delete(`${baseProductsUrl}/${id}`);
+        // Fetch fresh data after deletion
+        await dispatch('fetchDados');
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      } finally {
+        commit('setLoading', false);
+      }
     }
   }
 });
