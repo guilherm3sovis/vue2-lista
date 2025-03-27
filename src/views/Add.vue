@@ -22,6 +22,11 @@
           required
         >
       </div>
+      
+      <div class="form-group">
+        <label for="tags">Tags:</label>
+        <TagInput v-model="product.tags" />
+      </div>
 
       <div class="form-actions">
         <button type="submit" :disabled="loading">
@@ -37,12 +42,18 @@
 </template>
 
 <script>
+import TagInput from '@/components/TagInput.vue'
+
 export default {
+  components: {
+    TagInput
+  },
   data() {
     return {
       product: {
         name: '',
-        price: ''
+        price: '',
+        tags: []
       }
     }
   },
